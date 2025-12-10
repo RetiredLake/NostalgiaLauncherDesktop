@@ -103,6 +103,7 @@
   "checkbox.useDefaultExecutable": "Use default",
   "info.customExecutable": "Specify path to a custom game executable.",
   "checkbox.enableDebugging": "Enable debugging",
+  "checkbox.unlockPurchases": "Unlock Purchases",
   "label.postLaunchAction": "Post-launch action:",
   "combo.postLaunch.doNothing": "Do Nothing",
   "combo.postLaunch.minimize": "Minimize Launcher",

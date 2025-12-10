@@ -75,6 +75,7 @@ public class NostalgiaLauncherDesktop extends JFrame {
 
     private String postLaunchAction;
     private boolean enableDebugging;
+    private boolean unlockPurchases;
     private String lastPlayedVersionName;
     private double scaleFactor;
     private String themeName;
@@ -279,6 +280,7 @@ public class NostalgiaLauncherDesktop extends JFrame {
             }
             postLaunchAction = settings.getProperty("postLaunchAction", "Do Nothing");
             enableDebugging = Boolean.parseBoolean(settings.getProperty("enableDebugging", "false"));
+            unlockPurchases = Boolean.parseBoolean(settings.getProperty("unlockPurchases", "false"));
             lastPlayedVersionName = settings.getProperty("lastPlayedVersionName");
             scaleFactor = Double.parseDouble(settings.getProperty("scaleFactor", "1.3"));
             themeName = settings.getProperty("themeName", "Dark");
@@ -289,6 +291,7 @@ public class NostalgiaLauncherDesktop extends JFrame {
             executableSource = SystemInfo.isLinux ? "COMPILED" : "SERVER";
             postLaunchAction = "Do Nothing";
             enableDebugging = false;
+            unlockPurchases = false;
             scaleFactor = 1.3;
             themeName = "Dark";
         }
@@ -313,6 +316,7 @@ public class NostalgiaLauncherDesktop extends JFrame {
                 settings.setProperty("customLauncherPath", customLauncherPath);
             settings.setProperty("postLaunchAction", postLaunchAction);
             settings.setProperty("enableDebugging", String.valueOf(enableDebugging));
+            settings.setProperty("unlockPurchases", String.valueOf(unlockPurchases));
             if (lastPlayedVersionName != null)
                 settings.setProperty("lastPlayedVersionName", lastPlayedVersionName);
             settings.setProperty("scaleFactor", String.valueOf(scaleFactor));
@@ -393,7 +397,7 @@ public class NostalgiaLauncherDesktop extends JFrame {
 
         settingsPanel = new SettingsPanel(
                 customBackgroundPath, customVersionsSource, useDefaultVersionsSource, executableSource,
-                customLauncherPath, postLaunchAction, enableDebugging, scaleFactor, themeName, CURRENT_VERSION,
+                customLauncherPath, postLaunchAction, enableDebugging, unlockPurchases, scaleFactor, themeName, CURRENT_VERSION,
                 backgroundMode, customBackgroundColor, customTranslationPath, localeManager,
                 this::onSettingsSaved);
 
@@ -442,6 +446,7 @@ public class NostalgiaLauncherDesktop extends JFrame {
         customLauncherPath = updatedSettings.getCustomLauncherPath();
         postLaunchAction = updatedSettings.getPostLaunchAction();
         enableDebugging = updatedSettings.isEnableDebugging();
+        unlockPurchases = updatedSettings.isUnlockPurchases();
         scaleFactor = updatedSettings.getScaleFactor();
         backgroundMode = updatedSettings.getBackgroundMode();
         customBackgroundColor = updatedSettings.getCustomBackgroundColor();
