@@ -31,6 +31,7 @@ public class SettingsPanel extends JPanel {
 
     private JComboBox<String> postLaunchActionComboBox;
     private JCheckBox enableDebuggingCheckbox;
+    private JCheckBox unlockPurchasesCheckbox;
     private JSlider scaleSlider;
     private JLabel scaleLabel;
     private JButton saveButton;
@@ -63,6 +64,7 @@ public class SettingsPanel extends JPanel {
 
     private String postLaunchAction;
     private boolean enableDebugging;
+    private boolean unlockPurchases;
     private double scaleFactor;
     private String themeName;
     private String currentVersion;
@@ -94,7 +96,7 @@ public class SettingsPanel extends JPanel {
 
     public SettingsPanel(String currentBackgroundPath, String currentVersionsSource, boolean useDefaultVs,
             String currentExecutableSource, String currentCustomLauncherPath, String currentPostLaunchAction,
-            boolean currentEnableDebugging, double currentScaleFactor, String currentTheme, String currentVersion,
+            boolean currentEnableDebugging, boolean currentUnlockPurchases, double currentScaleFactor, String currentTheme, String currentVersion,
             String backgroundMode, Color customBackgroundColor, String currentCustomTranslationPath,
             LocaleManager localeManager, SaveListener saveListener) {
         this.localeManager = localeManager;
@@ -108,6 +110,7 @@ public class SettingsPanel extends JPanel {
         this.useDefaultLauncher = !"CUSTOM".equals(currentExecutableSource);
         this.postLaunchAction = currentPostLaunchAction;
         this.enableDebugging = currentEnableDebugging;
+        this.unlockPurchases= currentUnlockPurchases;
         this.scaleFactor = currentScaleFactor;
         this.themeName = currentTheme;
         this.currentVersion = currentVersion;
@@ -123,6 +126,7 @@ public class SettingsPanel extends JPanel {
 
         languageMap.put("Deutsch", "de");
         languageMap.put("English", "en");
+        languageMap.put("Español", "es");
         languageMap.put("Русский", "ru");
         languageMap.put("Беларуская", "be");
         languageMap.put("Українська", "uk");
@@ -299,6 +303,7 @@ public class SettingsPanel extends JPanel {
 
         this.customLauncherPath = customLauncherField.getText();
         this.enableDebugging = enableDebuggingCheckbox.isSelected();
+        this.unlockPurchases = unlockPurchasesCheckbox.isSelected();
 
         if (defaultBgRadio.isSelected()) {
             this.backgroundMode = "Default";
@@ -579,6 +584,15 @@ public class SettingsPanel extends JPanel {
         gbc.gridy = gridY;
         gbc.gridwidth = 3;
         card.add(enableDebuggingCheckbox, gbc);
+
+        gridY++;
+        unlockPurchasesCheckbox = new JCheckBox(localeManager.get("checkbox.unlockPurchases"));
+        unlockPurchasesCheckbox.setSelected(this.unlockPurchases);
+        unlockPurchasesCheckbox.setFont(getCustomFont(Font.BOLD, 14f));
+        gbc.gridx = 0;
+        gbc.gridy = gridY;
+        gbc.gridwidth = 3;
+        card.add(unlockPurchasesCheckbox, gbc);
 
         gridY++;
         JPanel filler = new JPanel();
@@ -901,6 +915,11 @@ public class SettingsPanel extends JPanel {
         deTranslationCredit.setFont(getCustomFont(Font.PLAIN, 14f));
         gbc.gridy = gridY++;
         card.add(deTranslationCredit, gbc);
+
+        JLabel esTranslationCredit = new JLabel("Spanish translation: RetiredLake");
+        esTranslationCredit.setFont(getCustomFont(Font.PLAIN, 14f));
+        gbc.gridy = gridY++;
+        card.add(esTranslationCredit, gbc);
 
         gbc.gridy = gridY++;
         gbc.gridx = 0;
